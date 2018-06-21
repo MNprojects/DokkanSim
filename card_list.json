@@ -1,0 +1,36 @@
+data = [
+  {
+    "id": 1212,
+    "title": "Flaring Battle Impulse",
+    "name": "Super Saiyan God Goku",
+    "type": "AGL",
+    "class": "Super",
+    "rarity": "TUR",
+    "maxAttack": 8089,
+    "kiMultiplier": 1.42,
+    "minSAKi": 12,
+    "maxKi": 12,
+    "kiLinks": ["Godly Power", "Shocking Speed", "Super Saiyan", "Over in a Flash", "Kamehameha", "Warrior Gods", "Fierce Battle"],
+    "categories": ["Realm of the Gods", "Universe Survival Saga", "Pure Saiyans"],
+    "onSA": function() { currentAttackMultiplier = currentAttackMultiplier + 0.8},
+    "percLeader": function() { team.forEach(card => { card.ki = card.ki + 2; card.maxAttack = card.maxAttack * 1.4; })},
+    "percOnSA": function() { this.currentSAMultiplier = Math.round((this.currentSAMultiplier + 0.8)*10)/10}
+  },
+  {
+    "id": 1212,
+    "title": "Flaring Battle Impulse",
+    "name": "Super Saiyan God Goku",
+    "type": "AGL",
+    "class": "Super",
+    "rarity": "TUR",
+    "maxAttack": 8089,
+    "kiMultiplier": 1.42,
+    "minSAKi": 12,
+    "maxKi": 12,
+    "kiLinks": ["Godly Power", "Shocking Speed", "Super Saiyan", "Over in a Flash", "Kamehameha", "Warrior Gods", "Fierce Battle"],
+    "categories": ["Realm of the Gods", "Universe Survival Saga", "Pure Saiyans"],
+    "onSA": function() { currentAttackMultiplier = currentAttackMultiplier + 0.8},
+    "percLeader": function() { team.forEach(card => { card.ki = card.ki + 2; card.maxAttack = card.maxAttack * 1.4; })},
+    "percOnSA": function() { this.currentSAMultiplier = Math.round((this.currentSAMultiplier + 0.8)*10)/10}
+  }
+]
