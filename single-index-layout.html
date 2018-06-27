@@ -1,0 +1,83 @@
+<html>
+<head>
+  
+</head>
+<body>
+  <h1>Dokkan Simulator</h1>
+  <div class="sim-selection"><select id="sim-mode" name="simMode">
+    <option value="" disabled selected>Choose a simulation type</option>
+    <option value="single">Single</option>
+    <option value="team">Team</option>
+  </select></div>
+
+  <div class="sim-body"> 
+    <h1>Sim Title</h1>
+
+    <div class="card" id="card-single">
+        <div class="card-details">
+          <h3>
+            <span id="card-single-name">Card Name </span>: 
+            <span id="card-single-title">Card Title</span>
+          </h3>
+        </div>
+        <div class="card-dropdown-div">Choose the card: 
+          <select class="card-dropdown" id="card-dropdown-single" name="card"></select>
+        </div>
+        <div>
+          <select class="leader-1-dropdown" id="leader-1-dropdown">
+            <option value="" disabled selected>Choose the first leader skill</option>
+            <option value="r-1">3 Ki, 170% Attack</option>
+            <option value="r-1">3 Ki, 150% Attack</option>
+            <option value="r-1">3 Ki, 120% Attack</option>
+            <option value="r-1">3 Ki, 100% Attack</option>
+            <option value="r-1">3 Ki, 70% Attack</option>
+            <option value="r-1">4 Ki, 100% Attack</option>
+            <option value="r-1">None</option>
+          </select>
+        </div>
+        <div>
+          <select class="leader-2-dropdown" id="leader-2-dropdown">
+            <option value="" disabled selected>Choose the second leader skill</option>
+            <option value="r-1">3 Ki, 170% Attack</option>
+            <option value="r-1">3 Ki, 150% Attack</option>
+            <option value="r-1">3 Ki, 120% Attack</option>
+            <option value="r-1">3 Ki, 100% Attack</option>
+            <option value="r-1">3 Ki, 70% Attack</option>
+            <option value="r-1">4 Ki, 100% Attack</option>
+            <option value="r-1">None</option>
+          </select>
+        </div>
+        <div class="rotation-selector">Rotation position: 
+          <select class="position-dropdown" id="position-dropdown-single">
+            <option value="" disabled selected>Choose the rotation position for this character</option>
+            <option value="r-1">Rotation 1</option>
+            <option value="r-2">Rotation 2</option>
+            <option value="r-floater">Floater</option>
+          </select>
+        </div>
+        <div>Super Attack Level:
+          <select class="sa-dropdown" id="sa-dropdown-single">
+            <option value="" disabled selected>Select the SA for this character</option>
+          </select>
+        </div>
+        <div>Dupe Level:
+          <select class="dupe-dropdown" id="dupe-dropdown-single">
+            <option value="" disabled selected>Select the amount of open paths</option>
+            <option value="d-none">None</option>
+            <option value="d-free">Free</option>
+            <option value="d-1">1</option>
+            <option value="d-2">2</option>
+            <option value="d-3">3</option>
+            <option value="d-rainbow">Rainbow</option>
+          </select>
+        </div>  
+    </div>
+
+  </div>
+    <script src="js/jquery.js"></script>
+    <script src="js/index.js"></script>
+    <script src="json/card_list.json"></script>
+    <script src="js/cards.js"></script>
+    <script src="js/simulator.js"></script>
+</body>
+</html>
