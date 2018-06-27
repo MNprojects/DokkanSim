@@ -1,6 +1,6 @@
 /*
 
-Dokkan Simulator Library
+Dokkan Simulator
 
 Call the method: 
 teamSim([ArrayContainingTeam], DesiredTurnSimCount)
@@ -8,98 +8,42 @@ to run the simulator with the desired team and the amount of turns to simulate o
 
 */
 
-// TODO: Add validation of current inputs
 
-// Validation functions. All return true if the given inputs are valid.
-function validateTeamArray(teamArray) {
-  if (teamArray.class === Array) {
-    return true;
-  }
-}
-function validateTeamLength(teamArray) {
-  if (teamArray.length === 7) {
-    return true
-  } 
-}
-
-// Checks each character has the correct attributes
-function validateTeamCharacters(teamArray) {
-  errors = [];
-  teamArray.forEach(card => {
-    if (!card.property){
-       errors.push([card.name, card.property]);
-    }
-    else if (card.otherPropETC != 0) {
-      errors.push([card.name, "otherPropETC" ,card.otherPropETC]);
-    }
-  });
-  if (errors.length === 0){
-  return true;
-  }
-  else {
-    return errors;
-  }
-}
-
-function runValidations(teamArray){
-  if (!validateTeamArray(teamArray)) {
-    console.log("The team is not in the correct datastructure. Expected: Array, Received: " + teamArray.class);
-  }
-  if (!validateTeamLength(teamArray)) {
-    console.log("The array is not the length required for the simulator. Requires: 7, Received: " + teamArray.length);
-  }
-  errors = validateTeamCharacters(teamArray);
-  if (errors != true) {
-    console.log("There is something wrong with one or more of the characters given. Received: ");
-    for (let i = 0; i < errors.length; i++) {
-       console.log("Card: " + errors[i][0]);
-       console.log("Property: " + errors[i][1]);
-       console.log("Received: " + errors[i][2]);
-    }
-  }
-}
-
-// TODO: Add functionality for single leaders (WT)
+// TODO think about return datastructure/info: character -> damage -> SA? -> crits? -> AA?
 // Follows the order of operations the game uses
+// Returns an array containing a hash for each attack: key = name, value = damage dealt that attack
 function teamSim(teamArray, turnMax) {
-  error = runValidations();
-  if(error != true){
-    return error;
-  }
-  else {
-    turnCount = 0;
-    prepCards(teamArray);
-    setRotations(teamArray);
-    leaderSkills(teamArray);
-    while(turnCount < turnMax) {
-      currentRotation = currentRotationGetter(teamArray, turnCount);
-      turnStartSkills(currentRotation);
-      linkSkillsActivate(currentRotation);
-      onAttackSkills(currentRotation);
-      onSASkills(currentRotation);
-      simTurn(currentRotation);
-      afterAttackSkills(currentRotation);
-      afterSASkills(currentRotation);
-      turnCount++;
+  turnCount = 0;
+  damageArray = [];
+  teamLeaderSkills(teamArray);
+  while(turnCount < turnMax) {
+    currentRotation = currentRotationGetter(teamArray, turnCount);
+    // Sims each card individually
+    for (let i = 0; i < currentRotation.length; i++) {
+      turnStartSkill(currentRotation[i]);
+      linkSkillsActivate(currentRotation[i]);
+      onAttackSkill(currentRotation[i]);
+      onSASkill(currentRotation[i]);
+
+      // TODO: rethink attack functions
+      simTurn(currentRotation[i]);
+
+      afterAttackSkills(currentRotation[i]);
+      afterSASkills(currentRotation[i]);
     }
+    turnCount++; 
   }
+  return damageArray;
+}
+// TODO: same as teamSim; finish function
+// Returns an array containing a hash for each attack
+function singleSim(card, turnMax, leaderSkillOne, leaderSkillTwo, activeLinksArray) {
+  turnCount = 0;
+  damageArray = [];
 }
 
-
-// TODO: push the selected characters to their respective rotations
-// Sets the rotation arrays to be equal to the users chosen cards/order
-function setRotations(teamArray) {
-  firstRotation = [];
-  secondRotation = [];
-  floaters = [];
-  firstRotation.push();
-  secondRotation.push();
-  floaters.push();
-}
-
-// TODO: redesign to allow for 1 leader (WT)
 // Checks for the type of leaderskill each of the designated leaders has and runs that on the team.
-function leaderSkills(teamArray) {
+function teamLeaderSkills(teamArray) {
   if (teamArray[0].percLeader){ teamArray[0].percLeader(); }
   if (teamArray[6].percLeader){ teamArray[6].percLeader(); }
   if (teamArray[0].flatLeader){ teamArray[0].flatLeader(); }
@@ -186,8 +130,8 @@ function attackCalc(card){
     
 }
 
-// Returns an array with 3 numbers. Simulates a random amount of Ki per turn.
-function randomKiGen() {
+// Returns an array with a length of the arguement. Simulates a random amount of Ki per turn.
+function randomKiGen(arrayLength) {
   // First number is the amount of ki, second is the chance of that number appearing. 
   // Adjust as needed.
   weighting = { 1:0.1, 2:0.2, 3:0.3, 4:0.2, 5:0.1, 6:0.05, 7:0.025, 8:0.025 };
@@ -201,11 +145,15 @@ function randomKiGen() {
   }
   var k = 0;
   kiTable = [];
-  while (k < 3) {
+  while (k < arrayLength) {
     kiTable.push(table[Math.floor(Math.random() * table.length)]);
     k++;
   }
   return kiTable;
+}
+
+function addKi(rotationArray, kiArray) {
+
 }
 
 // Checks the given card for any afterAttack skills and runs them
