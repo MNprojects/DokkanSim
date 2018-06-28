@@ -21,56 +21,78 @@
           </h3>
         </div>
         <div class="card-dropdown-div">Choose the card: 
-          <select class="card-dropdown" id="card-dropdown-single" name="card"></select>
+          <select class="dropdown" id="card-dropdown-single" name="card"></select>
         </div>
-        <div>
-          <select class="leader-1-dropdown" id="leader-1-dropdown">
+        <div><input type='submit' value='Auto best options'></div>
+        <div class="leader-1-dropdown-div">Choose the first leader skill: 
+          <select class="dropdown" id="leader-1-dropdown">
             <option value="" disabled selected>Choose the first leader skill</option>
-            <option value="r-1">3 Ki, 170% Attack</option>
-            <option value="r-1">3 Ki, 150% Attack</option>
-            <option value="r-1">3 Ki, 120% Attack</option>
-            <option value="r-1">3 Ki, 100% Attack</option>
-            <option value="r-1">3 Ki, 70% Attack</option>
-            <option value="r-1">4 Ki, 100% Attack</option>
-            <option value="r-1">None</option>
+            <option value="170">3 Ki, 170% Attack</option>
+            <option value="150">3 Ki, 150% Attack</option>
+            <option value="120">3 Ki, 120% Attack</option>
+            <option value="100">3 Ki, 100% Attack</option>
+            <option value="70">3 Ki, 70% Attack</option>
+            <option value="4">4 Ki, 100% Attack</option>
+            <option value="0">None</option>
           </select>
         </div>
-        <div>
-          <select class="leader-2-dropdown" id="leader-2-dropdown">
+        <div class="leader-2-dropdown-div">Choose the second leader skill: 
+          <select class="dropdown" id="leader-2-dropdown">
             <option value="" disabled selected>Choose the second leader skill</option>
-            <option value="r-1">3 Ki, 170% Attack</option>
-            <option value="r-1">3 Ki, 150% Attack</option>
-            <option value="r-1">3 Ki, 120% Attack</option>
-            <option value="r-1">3 Ki, 100% Attack</option>
-            <option value="r-1">3 Ki, 70% Attack</option>
-            <option value="r-1">4 Ki, 100% Attack</option>
-            <option value="r-1">None</option>
-          </select>
-        </div>
-        <div class="rotation-selector">Rotation position: 
-          <select class="position-dropdown" id="position-dropdown-single">
-            <option value="" disabled selected>Choose the rotation position for this character</option>
-            <option value="r-1">Rotation 1</option>
-            <option value="r-2">Rotation 2</option>
-            <option value="r-floater">Floater</option>
+            <option value="170">3 Ki, 170% Attack</option>
+            <option value="150">3 Ki, 150% Attack</option>
+            <option value="120">3 Ki, 120% Attack</option>
+            <option value="100">3 Ki, 100% Attack</option>
+            <option value="70">3 Ki, 70% Attack</option>
+            <option value="4">4 Ki, 100% Attack</option>
+            <option value="0">None</option>
           </select>
         </div>
         <div>Super Attack Level:
-          <select class="sa-dropdown" id="sa-dropdown-single">
-            <option value="" disabled selected>Select the SA for this character</option>
+          <select class="dropdown" id="sa-dropdown-single">
+            <option value="invalid" disabled selected>Select the SA for this character</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
           </select>
         </div>
+        <!-- TODO: Change to tick boxes -->
         <div>Dupe Level:
-          <select class="dupe-dropdown" id="dupe-dropdown-single">
-            <option value="" disabled selected>Select the amount of open paths</option>
-            <option value="d-none">None</option>
-            <option value="d-free">Free</option>
-            <option value="d-1">1</option>
-            <option value="d-2">2</option>
-            <option value="d-3">3</option>
-            <option value="d-rainbow">Rainbow</option>
+          <select class="dropdown" multiple="multiple" id="dupe-dropdown-single">
+            <option value="free">Free</option>
+            <option value="tl">Top Left</option>
+            <option value="tr">Top Right</option>
+            <option value="bl">Bottom Left</option>
+            <option value="br">Bottom Right</option>
+            <option value="rainbow">Rainbow</option>
           </select>
-        </div>  
+        </div>
+        <div class="turn-count" id="turn-count">Turn count:
+          <input></input>
+        </div>
+        <div class="instructions" id="single-instructions">
+          <h3>Instructions - Single Character Simulator</h3>
+          <ol>
+            <li>Start by choosing the card you wish to run the simulation on.</li>
+            <ul><li>Use the auto button to quickly select the current most likely best settings for the character and move to step 5 OR follow the instructions below.</li></ul>
+            <li>Choose from the common leader skills you want to be applied during the simulation. You can choose to have none or just 1 apply.</li>
+            <li>Choose the Super Attack level for the chosen character.</li>
+            <li>Check the boxes that represent the hidden potential system.
+              <ul>
+                <li>Checking "Rainbow" will override all the other inputs and will be the same as selecting all the individual branches.</li>
+                <li>Checking a branch will assume you want the entirety of the branch, including what would be available without a dupe (the free dupe area).</li>
+              </ul>
+            </li>
+            <li>Enter a number for how many times you want to run the simulator. Choosing a higher number will give a more accurate picture on the average attack of the unit. The single card sim is limited to a maximum of 1000 turns.</li>
+          </ol>
+        </div>
     </div>
 
   </div>
