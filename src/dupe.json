@@ -1,10 +1,10 @@
-dupeBoosts = [
+dupeAttackBoosts = [
     {
       'TEQ': {
         'S': {
-          //EXAMPLE 'free':[1000, 3, 5, 0, 5],
-          // 'br':[AttackBoost, SABoost, AAChanceMax, CritChanceMax, TotalChanceMax],
+          'free':,
           'bl':,
+          'br':,
           'tr':,
           'tl':,
   
@@ -119,3 +119,54 @@ dupeBoosts = [
   
     }
   ];
+
+dupeSkills = [
+  {                     
+    'Rainbow': {
+      'AA': 15,
+      'Crit': 15,
+      'Max': 21,
+      'SABoost': 15
+    },
+    'dupe-tl': {
+      'AA': 6,
+      'Crit': 6,
+      'Max': 9,
+      'SABoost': 3
+    },
+    'dupe-tr': {
+      'AA': 0,
+      'Crit': 0,
+      'Max': 0,
+      'SABoost': 7
+    },
+    'dupe-bl': {
+      'AA': 0,
+      'Crit': 0,
+      'Max': 0,
+      'SABoost': 2
+    },
+    'dupe-br': {
+      'AA': 9,
+      'Crit': 9,
+      'Max': 12,
+      'SABoost': 3
+    },
+    'dupe-free': {
+      'AA': 0,
+      'Crit': 0,
+      'Max': 0,
+      'SABoost': 6
+    }
+  }
+]
+
+dupeTypeSkill = [
+  {
+    'TEQ': 'Crit',
+    'AGL': 'AA',
+    'STR': 'Crit',
+    'PHY': 'AA',
+    'INT': 'Dodge'
+  }
+]

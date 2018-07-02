@@ -37,7 +37,7 @@ function teamSim(teamArray, turnMax) {
 }
 // TODO: same as teamSim; finish function
 // Returns an array containing a hash for each attack
-function singleSim(card, turnMax, leaderSkillOne, leaderSkillTwo, activeLinksArray) {
+function singleSim(card, turnMaxInt, leaderSkillOneFunction, leaderSkillTwoFunction, activeLinksArray) {
   turnCount = 0;
   damageArray = [];
 }
