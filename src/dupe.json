@@ -1,119 +1,131 @@
 dupeAttackBoosts = [
     {
+      /*
+      TYPE : {
+        Ranking : {
+          'Dupe-Area':[SA1,SA2,SA4,SA6],
+          'Dupe-Area':[FREE,MAXED],
+          'Dupe-Area':[FREE,MAXED],
+          'Dupe-Area':[FREE,MAXED],
+          'Dupe-Area':[FREE,MAXED]
+        }
+      }
+      */
+
       'TEQ': {
         'S': {
-          'free':,
-          'bl':,
-          'br':,
-          'tr':,
-          'tl':,
-  
+          'dupe-free':[1820,1918,2443,2800],
+          'dupe-bl':[420,420],
+          'dupe-br':[980,2940],
+          'dupe-tr':[980,980],
+          'dupe-tl':[420,420]
           },
         'A': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 5400
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl':[,] 
         },
         'B': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 3240
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl':[,] 
           }
         },
       'AGL': {
         'S': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 7000
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl':[,]
           },
         'A': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 5400
+          'dupe-free':[1300,1370,1745,2000],
+          'dupe-br':[700,1700],
+          'dupe-bl':[300,300],
+          'dupe-tr':[700,700],
+          // Double check TL [1]
+          'dupe-tl':[300,300]
         },
         'B': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 3000
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl':[,]
           }
         },
       'STR': {
         'S': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 7560
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl':[,]
           },
         'A': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 5400
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl': [,]
         },
         'B': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 3240
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl':[,]
           }
         },
       'PHY': {
         'S': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 7000
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl':[,]
           },
         'A': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 5000
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl':[,]
         },
         'B': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 3000
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl': [,]
           }
         },
       'INT': {
         'S': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 7000
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl':[,]
           },
         'A': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 5000
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl': [,]
         },
         'B': {
-          'free':,
-          'br':,
-          'bl':,
-          'tr':,
-          'tl': 3000
+          'dupe-free':[,],
+          'dupe-br':[,],
+          'dupe-bl':[,],
+          'dupe-tr':[,],
+          'dupe-tl':[,]
           }
         },
   
