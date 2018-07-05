@@ -48,3 +48,7 @@ function validateTeamArray(teamArray) {
       }
     }
   }
+
+  function validateSingleCard() {
+
+  }

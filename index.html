@@ -1,281 +1,656 @@
+<!DOCTYPE html>
 <html>
 <head>
-  
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Dokkan Simulator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
 </head>
 <body>
+  <!-- Sim Selection Dropdown -->
   <h1>Dokkan Simulator</h1>
-  <div class="sim-selection"><select id="sim-mode" name="simMode">
-    <option value="" disabled selected>Choose a simulation type</option>
-    <option value="single">Single</option>
-    <option value="team">Team</option>
-  </select></div>
+  <div class="sim-selection">
+    <select onchange="simDisplay()" id="sim-mode" name="simMode">
+      <option disabled selected>Choose a simulation type</option>
+      <option value="single">Single</option>
+      <option value="team">Team</option>
+    </select>
+  </div>
 
-  <div class="sim-body"> 
-    <h1>Sim Title</h1>
-
-    <div class="card" id="card-1">
+  <!-- Single Simulator -->
+  <div class="hidden" id="single-sim-body"> 
+    <h1>Single Character Simulator</h1>
+    <div class="card" id="card-single">
         <div class="card-details">
           <h3>
-            <span id="card-1-name">Card Name </span>: 
-            <span id="card-1-title">Card Title</span>
+            <span id="card-single-name">Card Name </span>: 
+            <span id="card-single-title">Card Title</span>
           </h3>
         </div>
         <div class="card-dropdown-div">Choose the card: 
-          <select class="card-dropdown" id="card-dropdown-1" name="card"></select>
-          <input type="checkbox" id="leader-1" value="leader" /><label for="leader-1">Leader</label>
+          <select class="dropdown" id="card-dropdown-single" name="card" onchange="checkSALevel()">
+            <option disabled selected>Choose a character</option>
+          </select>
         </div>
-        <div class="rotation-selector">Rotation position: 
-          <select class="position-dropdown" id="position-dropdown-1">
-            <option value="" disabled selected>Choose the rotation position for this character</option>
-            <option value="r-1">Rotation 1</option>
-            <option value="r-2">Rotation 2</option>
-            <option value="r-floater">Floater</option>
+        <div><input type='submit' value='Auto best options' id="single-auto-best" onclick="setSingleAutoBest()"></div>
+        <div class="leader-1-dropdown-div">Choose the first leader skill: 
+          <select class="dropdown" id="leader-1-dropdown">
+            <option value="" disabled selected>Choose the first leader skill</option>
+            <option value="170">3 Ki, 170% Attack</option>
+            <option value="150">3 Ki, 150% Attack</option>
+            <option value="120">3 Ki, 120% Attack</option>
+            <option value="100">3 Ki, 100% Attack</option>
+            <option value="70">3 Ki, 70% Attack</option>
+            <option value="4">4 Ki, 100% Attack</option>
+            <option value="0">None</option>
+          </select>
+        </div>
+        <div class="leader-2-dropdown-div">Choose the second leader skill: 
+          <select class="dropdown" id="leader-2-dropdown">
+            <option value="" disabled selected>Choose the second leader skill</option>
+            <option value="170">3 Ki, 170% Attack</option>
+            <option value="150">3 Ki, 150% Attack</option>
+            <option value="120">3 Ki, 120% Attack</option>
+            <option value="100">3 Ki, 100% Attack</option>
+            <option value="70">3 Ki, 70% Attack</option>
+            <option value="4">4 Ki, 100% Attack</option>
+            <option value="0">None</option>
           </select>
         </div>
         <div>Super Attack Level:
-          <select class="sa-dropdown" id="sa-dropdown-1">
-            <option value="" disabled selected>Select the SA for this character</option>
+          <select class="dropdown" id="sa-dropdown-single">
+            <option selected="selected" value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
           </select>
         </div>
-        <div>Dupe Level:
-          <select class="dupe-dropdown" id="dupe-dropdown-1">
-            <option value="" disabled selected>Select the amount of open paths</option>
-            <option value="d-none">None</option>
-            <option value="d-free">Free</option>
-            <option value="d-1">1</option>
-            <option value="d-2">2</option>
-            <option value="d-3">3</option>
-            <option value="d-rainbow">Rainbow</option>
+        <div id="dupe-single-div">Dupe Level:
+          <div>
+              Free: <input class="single-dupe-checkbox" type="checkbox" id="dupe-free">
+              Top left: <input class="single-dupe-checkbox" type="checkbox" id="dupe-tl">
+              Top right: <input class="single-dupe-checkbox" type="checkbox" id="dupe-tr">
+              Bottom left: <input class="single-dupe-checkbox" type="checkbox" id="dupe-bl">
+              Bottom right: <input class="single-dupe-checkbox" type="checkbox" id="dupe-br">
+              Rainbow: <input class="single-dupe-checkbox" type="checkbox" id="dupe-rainbow">
+          </div>
+        </div>
+        <div id="single-hidden-skills-dropdowns">Hidden Potential Skills: 
+          <div>Additional Attack Level: 
+            <select class="dropdown" id="aa-dropdown-single">
+              <option value="15">15</option>
+              <option value="12">12</option>
+              <option value="9">9</option>
+              <option selected="selected" value="6">6</option>
+              <option value="3">3</option>
+              <option value="0">0</option>
+            </select>
+          </div>
+          <div>Critial Level: 
+            <select class="dropdown" id="crit-dropdown-single">
+              <option selected="selected" value="15">15</option>
+              <option value="12">12</option>
+              <option value="9">9</option>
+              <option value="6">6</option>
+              <option value="3">3</option>
+              <option value="0">0</option>
+            </select>
+          </div>
+        </div>
+        <div class="turn-count" id="single-turn-count-div">Turn count:
+          <input id="single-turn-count-input"></input>
+        </div>      
+      </div>
+  </div>
+
+  <!-- Team Simulator -->
+  <div class="hidden" id="team-sim-body"> 
+    <h1>Team Simulator</h1>
+    <div>
+      <input type="submit" value="Auto best values" id="team-auto-best" onclick="setTeamAutoBest()">
+    </div>
+    <div class="card" id="card-1">
+      <div class="card-details">
+        <h3>
+          <span id="card-1-name">Card Name </span>: 
+          <span id="card-1-title">Card Title</span>
+        </h3>
+      </div>
+      <div class="card-dropdown-div">Choose the card: 
+        <select class="team-card-dropdown" id="card-dropdown-1" name="card" onchange="checkSALevel()">
+          <option disabled selected>Choose a character</option>
+        </select>
+        <input class="leader-checkbox" type="checkbox" id="leader-1" value="leader" /><label for="leader-1">Leader</label>
+      </div>
+      <div class="rotation-selector">Rotation position: 
+        <select class="position-dropdown" id="position-dropdown-1">
+          <option selected="selected" value="r-1">Rotation 1</option>
+          <option value="r-2">Rotation 2</option>
+          <option value="r-floater">Floater</option>
+        </select>
+      </div>
+      <div>Super Attack Level:
+        <select class="sa-dropdown" id="sa-dropdown-1">
+          <option selected="selected" value="10">10</option>
+          <option value="9">9</option>
+          <option value="8">8</option>
+          <option value="7">7</option>
+          <option value="6">6</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select>
+      </div>
+      <div>Dupe Level:
+        <div id="dupe-team-div-1">
+            Free: <input class="team-dupe-checkbox" type="checkbox" id="dupe-free-1">
+            Top left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tl-1">
+            Top right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tr-1">
+            Bottom left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-bl-1">
+            Bottom right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-br-1">
+            Rainbow: <input class="team-dupe-checkbox" type="checkbox" id="dupe-rainbow-1">
+        </div>
+      </div>
+      <div id="single-hidden-skills-dropdowns">Hidden Potential Skills: 
+        <div>Additional Attack Level: 
+          <select class="dropdown" id="aa-dropdown-team-1">
+            <option value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option selected="selected" value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
-        </div>  
+        </div>
+        <div>Critial Level: 
+          <select class="dropdown" id="crit-dropdown-team-1">
+            <option selected="selected" value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
+          </select>
+        </div>
+      </div> 
     </div>
 
     <div class="card" id="card-2">
-        <div class="card-details">
-          <h3>
-            <span id="card-2-name">Card Name </span>: 
-            <span id="card-2-title">Card Title</span>
-          </h3>
+      <div class="card-details">
+        <h3>
+          <span id="card-2-name">Card Name </span>: 
+          <span id="card-2-title">Card Title</span>
+        </h3>
+      </div>
+      <div class="card-dropdown-div">Choose the card: 
+        <select class="team-card-dropdown" id="card-dropdown-2" name="card" onchange="checkSALevel()">
+          <option disabled selected>Choose a character</option>
+        </select>
+        <input class="leader-checkbox" type="checkbox" id="leader-2" value="leader" /><label for="leader-1">Leader</label>
+      </div>
+      <div class="rotation-selector">Rotation position: 
+        <select class="position-dropdown" id="position-dropdown-2">
+          <option selected="selected" value="r-1">Rotation 1</option>
+          <option value="r-2">Rotation 2</option>
+          <option value="r-floater">Floater</option>
+        </select>
+      </div>
+      <div>Super Attack Level:
+        <select class="sa-dropdown" id="sa-dropdown-2">
+          <option selected="selected" value="10">10</option>
+          <option value="9">9</option>
+          <option value="8">8</option>
+          <option value="7">7</option>
+          <option value="6">6</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select>
+      </div>
+      <div>Dupe Level:
+        <div id="dupe-team-div-2">
+            Free: <input class="team-dupe-checkbox" type="checkbox" id="dupe-free-2">
+            Top left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tl-2">
+            Top right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tr-2">
+            Bottom left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-bl-2">
+            Bottom right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-br-2">
+            Rainbow: <input class="team-dupe-checkbox" type="checkbox" id="dupe-rainbow-2">
         </div>
-        <div class="card-dropdown-div">Choose the card: 
-          <select class="card-dropdown" id="card-dropdown-2" name="card"></select>
-          <input type="checkbox" id="leader-2" value="leader" /><label for="leader-1">Leader</label>
-        </div>
-        <div class="rotation-selector">Rotation position: 
-          <select class="position-dropdown" id="position-dropdown-2">
-            <option value="" disabled selected>Choose the rotation position for this character</option>
-            <option value="r-1">Rotation 1</option>
-            <option value="r-2">Rotation 2</option>
-            <option value="r-floater">Floater</option>
+      </div>  
+      <div id="single-hidden-skills-dropdowns">Hidden Potential Skills: 
+        <div>Additional Attack Level: 
+          <select class="dropdown" id="aa-dropdown-team-2">
+            <option value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option selected="selected" value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Super Attack Level:
-          <select class="sa-dropdown" id="sa-dropdown-2">
-            <option value="" disabled selected>Select the SA for this character</option>
+        <div>Critial Level: 
+          <select class="dropdown" id="crit-dropdown-team-2">
+            <option selected="selected" value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Dupe Level:
-          <select class="dupe-dropdown" id="dupe-dropdown-2">
-            <option value="" disabled selected>Select the amount of open paths</option>
-            <option value="d-none">None</option>
-            <option value="d-free">Free</option>
-            <option value="d-1">1</option>
-            <option value="d-2">2</option>
-            <option value="d-3">3</option>
-            <option value="d-rainbow">Rainbow</option>
-          </select>
-        </div>  
+      </div>
     </div>
 
     <div class="card" id="card-3">
-        <div class="card-details">
-          <h3>
-            <span id="card-3-name">Card Name </span>: 
-            <span id="card-3-title">Card Title</span>
-          </h3>
+      <div class="card-details">
+        <h3>
+          <span id="card-3-name">Card Name </span>: 
+          <span id="card-3-title">Card Title</span>
+        </h3>
+      </div>
+      <div class="card-dropdown-div">Choose the card: 
+        <select class="team-card-dropdown" id="card-dropdown-3" name="card" onchange="checkSALevel()">
+          <option disabled selected>Choose a character</option>
+        </select>
+        <input class="leader-checkbox" type="checkbox" id="leader-3" value="leader" /><label for="leader-3">Leader</label>
+      </div>
+      <div class="rotation-selector">Rotation position: 
+        <select class="position-dropdown" id="position-dropdown-3">
+
+          <option value="r-1">Rotation 1</option>
+          <option selected="selected" value="r-2">Rotation 2</option>
+          <option value="r-floater">Floater</option>
+        </select>
+      </div>
+      <div>Super Attack Level:
+        <select class="sa-dropdown" id="sa-dropdown-3">
+          <option selected="selected" value="10">10</option>
+          <option value="9">9</option>
+          <option value="8">8</option>
+          <option value="7">7</option>
+          <option value="6">6</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select>
+      </div>
+      <div>Dupe Level:
+        <div id="dupe-team-div-3">
+            Free: <input class="team-dupe-checkbox" type="checkbox" id="dupe-free-3">
+            Top left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tl-3">
+            Top right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tr-3">
+            Bottom left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-bl-3">
+            Bottom right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-br-3">
+            Rainbow: <input class="team-dupe-checkbox" type="checkbox" id="dupe-rainbow-3">
         </div>
-        <div class="card-dropdown-div">Choose the card: 
-          <select class="card-dropdown" id="card-dropdown-3" name="card"></select>
-          <input type="checkbox" id="leader-3" value="leader" /><label for="leader-3">Leader</label>
-        </div>
-        <div class="rotation-selector">Rotation position: 
-          <select class="position-dropdown" id="position-dropdown-3">
-            <option value="" disabled selected>Choose the rotation position for this character</option>
-            <option value="r-1">Rotation 1</option>
-            <option value="r-2">Rotation 2</option>
-            <option value="r-floater">Floater</option>
+      </div> 
+      <div id="single-hidden-skills-dropdowns">Hidden Potential Skills: 
+        <div>Additional Attack Level: 
+          <select class="dropdown" id="aa-dropdown-team-3">
+            <option value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option selected="selected" value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Super Attack Level:
-          <select class="sa-dropdown" id="sa-dropdown-3">
-            <option value="" disabled selected>Select the SA for this character</option>
+        <div>Critial Level: 
+          <select class="dropdown" id="crit-dropdown-team-3">
+            <option selected="selected" value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Dupe Level:
-          <select class="dupe-dropdown" id="dupe-dropdown-3">
-            <option value="" disabled selected>Select the amount of open paths</option>
-            <option value="d-none">None</option>
-            <option value="d-free">Free</option>
-            <option value="d-1">1</option>
-            <option value="d-2">2</option>
-            <option value="d-3">3</option>
-            <option value="d-rainbow">Rainbow</option>
-          </select>
-        </div>  
+      </div>
     </div>
 
     <div class="card" id="card-4">
-        <div class="card-details">
-          <h3>
-            <span id="card-4-name">Card Name </span>: 
-            <span id="card-4-title">Card Title</span>
-          </h3>
+      <div class="card-details">
+        <h3>
+          <span id="card-4-name">Card Name </span>: 
+          <span id="card-4-title">Card Title</span>
+        </h3>
+      </div>
+      <div class="card-dropdown-div">Choose the card: 
+        <select class="team-card-dropdown" id="card-dropdown-4" name="card" onchange="checkSALevel()">
+          <option disabled selected>Choose a character</option>
+        </select>
+        <input class="leader-checkbox" type="checkbox" id="leader-4" value="leader" /><label for="leader-4">Leader</label>
+      </div>
+      <div class="rotation-selector">Rotation position: 
+        <select class="position-dropdown" id="position-dropdown-4">
+          <option value="r-1">Rotation 1</option>
+          <option selected="selected" value="r-2">Rotation 2</option>
+          <option value="r-floater">Floater</option>
+        </select>
+      </div>
+      <div>Super Attack Level:
+        <select class="sa-dropdown" id="sa-dropdown-4">
+          <option selected="selected" value="10">10</option>
+          <option value="9">9</option>
+          <option value="8">8</option>
+          <option value="7">7</option>
+          <option value="6">6</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select>
+      </div>
+      <div>Dupe Level:
+        <div id="dupe-team-div-4">
+            Free: <input class="team-dupe-checkbox" type="checkbox" id="dupe-free-4">
+            Top left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tl-4">
+            Top right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tr-4">
+            Bottom left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-bl-4">
+            Bottom right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-br-4">
+            Rainbow: <input class="team-dupe-checkbox" type="checkbox" id="dupe-rainbow-4">
         </div>
-        <div class="card-dropdown-div">Choose the card: 
-          <select class="card-dropdown" id="card-dropdown-4" name="card"></select>
-          <input type="checkbox" id="leader-4" value="leader" /><label for="leader-4">Leader</label>
-        </div>
-        <div class="rotation-selector">Rotation position: 
-          <select class="position-dropdown" id="position-dropdown-4">
-            <option value="" disabled selected>Choose the rotation position for this character</option>
-            <option value="r-1">Rotation 1</option>
-            <option value="r-2">Rotation 2</option>
-            <option value="r-floater">Floater</option>
+      </div>
+      <div id="single-hidden-skills-dropdowns">Hidden Potential Skills: 
+        <div>Additional Attack Level: 
+          <select class="dropdown" id="aa-dropdown-team-4">
+            <option value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option selected="selected" value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Super Attack Level:
-          <select class="sa-dropdown" id="sa-dropdown-4">
-            <option value="" disabled selected>Select the SA for this character</option>
+        <div>Critial Level: 
+          <select class="dropdown" id="crit-dropdown-team-4">
+            <option selected="selected" value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Dupe Level:
-          <select class="dupe-dropdown" id="dupe-dropdown-4">
-            <option value="" disabled selected>Select the amount of open paths</option>
-            <option value="d-none">None</option>
-            <option value="d-free">Free</option>
-            <option value="d-1">1</option>
-            <option value="d-2">2</option>
-            <option value="d-3">3</option>
-            <option value="d-rainbow">Rainbow</option>
-          </select>
-        </div>  
+      </div>
     </div>
 
     <div class="card" id="card-5">
-        <div class="card-details">
-          <h3>
-            <span id="card-5-name">Card Name </span>: 
-            <span id="card-5-title">Card Title</span>
-          </h3>
+      <div class="card-details">
+        <h3>
+          <span id="card-5-name">Card Name </span>: 
+          <span id="card-5-title">Card Title</span>
+        </h3>
+      </div>
+      <div class="card-dropdown-div">Choose the card: 
+        <select class="team-card-dropdown" id="card-dropdown-5" name="card" onchange="checkSALevel()">
+          <option disabled selected>Choose a character</option>
+        </select>
+        <input class="leader-checkbox" type="checkbox" id="leader-5" value="leader" /><label for="leader-5">Leader</label>
+      </div>
+      <div class="rotation-selector">Rotation position: 
+        <select class="position-dropdown" id="position-dropdown-5">
+          <option value="r-1">Rotation 1</option>
+          <option value="r-2">Rotation 2</option>
+          <option selected="selected" value="r-floater">Floater</option>
+        </select>
+      </div>
+      <div>Super Attack Level:
+        <select class="sa-dropdown" id="sa-dropdown-5">
+          <option selected="selected" value="10">10</option>
+          <option value="9">9</option>
+          <option value="8">8</option>
+          <option value="7">7</option>
+          <option value="6">6</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select>
+      </div>
+      <div>Dupe Level:
+        <div id="dupe-team-div-5">
+            Free: <input class="team-dupe-checkbox" type="checkbox" id="dupe-free-5">
+            Top left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tl-5">
+            Top right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tr-5">
+            Bottom left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-bl-5">
+            Bottom right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-br-5">
+            Rainbow: <input class="team-dupe-checkbox" type="checkbox" id="dupe-rainbow-5">
         </div>
-        <div class="card-dropdown-div">Choose the card: 
-          <select class="card-dropdown" id="card-dropdown-" name="card"></select>
-          <input type="checkbox" id="leader-5" value="leader" /><label for="leader-5">Leader</label>
-        </div>
-        <div class="rotation-selector">Rotation position: 
-          <select class="position-dropdown" id="position-dropdown-5">
-            <option value="" disabled selected>Choose the rotation position for this character</option>
-            <option value="r-1">Rotation 1</option>
-            <option value="r-2">Rotation 2</option>
-            <option value="r-floater">Floater</option>
+      </div>
+      <div id="single-hidden-skills-dropdowns">Hidden Potential Skills: 
+        <div>Additional Attack Level: 
+          <select class="dropdown" id="aa-dropdown-team-5">
+            <option value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option selected="selected" value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Super Attack Level:
-          <select class="sa-dropdown" id="sa-dropdown-5">
-            <option value="" disabled selected>Select the SA for this character</option>
+        <div>Critial Level: 
+          <select class="dropdown" id="crit-dropdown-team-5">
+            <option selected="selected" value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Dupe Level:
-          <select class="dupe-dropdown" id="dupe-dropdown-5">
-            <option value="" disabled selected>Select the amount of open paths</option>
-            <option value="d-none">None</option>
-            <option value="d-free">Free</option>
-            <option value="d-1">1</option>
-            <option value="d-2">2</option>
-            <option value="d-3">3</option>
-            <option value="d-rainbow">Rainbow</option>
-          </select>
-        </div>  
+      </div> 
     </div>
 
     <div class="card" id="card-6">
-        <div class="card-details">
-          <h3>
-            <span id="card-6-name">Card Name </span>: 
-            <span id="card-6-title">Card Title</span>
-          </h3>
+      <div class="card-details">
+        <h3>
+          <span id="card-6-name">Card Name </span>: 
+          <span id="card-6-title">Card Title</span>
+        </h3>
+      </div>
+      <div class="card-dropdown-div">Choose the card: 
+        <select class="team-card-dropdown" id="card-dropdown-6" name="card" onchange="checkSALevel()">
+          <option disabled selected>Choose a character</option>
+        </select>
+        <input class="leader-checkbox" type="checkbox" id="leader-6" value="leader" /><label for="leader-6">Leader</label>
+      </div>
+      <div class="rotation-selector">Rotation position: 
+        <select class="position-dropdown" id="position-dropdown-6">
+          <option value="r-1">Rotation 1</option>
+          <option value="r-2">Rotation 2</option>
+          <option selected="selected" value="r-floater">Floater</option>
+        </select>
+      </div>
+      <div>Super Attack Level:
+        <select class="sa-dropdown" id="sa-dropdown-6">
+          <option selected="selected" value="10">10</option>
+          <option value="9">9</option>
+          <option value="8">8</option>
+          <option value="7">7</option>
+          <option value="6">6</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select>
+      </div>
+      <div>Dupe Level:
+        <div id="dupe-team-div-6">
+            Free: <input class="team-dupe-checkbox" type="checkbox" id="dupe-free-6">
+            Top left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tl-6">
+            Top right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tr-6">
+            Bottom left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-bl-6">
+            Bottom right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-br-6">
+            Rainbow: <input class="team-dupe-checkbox" type="checkbox" id="dupe-rainbow-6">
         </div>
-        <div class="card-dropdown-div">Choose the card: 
-          <select class="card-dropdown" id="card-dropdown-" name="card"></select>
-          <input type="checkbox" id="leader-6" value="leader" /><label for="leader-6">Leader</label>
-        </div>
-        <div class="rotation-selector">Rotation position: 
-          <select class="position-dropdown" id="position-dropdown-6">
-            <option value="" disabled selected>Choose the rotation position for this character</option>
-            <option value="r-1">Rotation 1</option>
-            <option value="r-2">Rotation 2</option>
-            <option value="r-floater">Floater</option>
+      </div>
+      <div id="single-hidden-skills-dropdowns">Hidden Potential Skills: 
+        <div>Additional Attack Level: 
+          <select class="dropdown" id="aa-dropdown-team-6">
+            <option value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option  selected="selected"value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Super Attack Level:
-          <select class="sa-dropdown" id="sa-dropdown-6">
-            <option value="" disabled selected>Select the SA for this character</option>
+        <div>Critial Level: 
+          <select class="dropdown" id="crit-dropdown-team-6">
+            <option selected="selected" value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Dupe Level:
-          <select class="dupe-dropdown" id="dupe-dropdown-6">
-            <option value="" disabled selected>Select the amount of open paths</option>
-            <option value="d-none">None</option>
-            <option value="d-free">Free</option>
-            <option value="d-1">1</option>
-            <option value="d-2">2</option>
-            <option value="d-3">3</option>
-            <option value="d-rainbow">Rainbow</option>
-          </select>
-        </div>  
+      </div>  
     </div>
 
     <div class="card" id="card-7">
-        <div class="card-details">
-          <h3>
-            <span id="card-7-name">Card Name </span>: 
-            <span id="card-7-title">Card Title</span>
-          </h3>
+      <div class="card-details">
+        <h3>
+          <span id="card-7-name">Card Name </span>: 
+          <span id="card-7-title">Card Title</span>
+        </h3>
+      </div>
+      <div class="card-dropdown-div">Choose the card: 
+        <select class="team-card-dropdown" id="card-dropdown-7" name="card" onchange="checkSALevel()">
+          <option disabled selected>Choose a character</option>
+        </select>
+        <input class="leader-checkbox" type="checkbox" id="leader-7" value="leader" /><label for="leader-7">Leader</label>
+      </div>
+      <div class="rotation-selector">Rotation position: 
+        <select class="position-dropdown" id="position-dropdown-7">
+          <option value="r-1">Rotation 1</option>
+          <option value="r-2">Rotation 2</option>
+          <option selected="selected" value="r-floater">Floater</option>
+        </select>
+      </div>
+      <div>Super Attack Level:
+        <select class="sa-dropdown" id="sa-dropdown-7">
+          <option selected="selected" value="10">10</option>
+          <option value="9">9</option>
+          <option value="8">8</option>
+          <option value="7">7</option>
+          <option value="6">6</option>
+          <option value="5">5</option>
+          <option value="4">4</option>
+          <option value="3">3</option>
+          <option value="2">2</option>
+          <option value="1">1</option>
+        </select>
+      </div>
+      <div>Dupe Level:
+        <div id="dupe-team-div-7">
+            Free: <input class="team-dupe-checkbox" type="checkbox" id="dupe-free-7">
+            Top left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tl-7">
+            Top right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-tr-7">
+            Bottom left: <input class="team-dupe-checkbox" type="checkbox" id="dupe-bl-7">
+            Bottom right: <input class="team-dupe-checkbox" type="checkbox" id="dupe-br-7">
+            Rainbow: <input class="team-dupe-checkbox" type="checkbox" id="dupe-rainbow-7">
         </div>
-        <div class="card-dropdown-div">Choose the card: 
-          <select class="card-dropdown" id="card-dropdown-7" name="card"></select>
-          <input type="checkbox" id="leader-7" value="leader" /><label for="leader-7">Leader</label>
-        </div>
-        <div class="rotation-selector">Rotation position: 
-          <select class="position-dropdown" id="position-dropdown-7">
-            <option value="" disabled selected>Choose the rotation position for this character</option>
-            <option value="r-1">Rotation 1</option>
-            <option value="r-2">Rotation 2</option>
-            <option value="r-floater">Floater</option>
+      </div>
+      <div id="single-hidden-skills-dropdowns">Hidden Potential Skills: 
+        <div>Additional Attack Level: 
+          <select class="dropdown" id="aa-dropdown-team-7">
+            <option value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option selected="selected" value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Super Attack Level:
-          <select class="sa-dropdown" id="sa-dropdown-7">
-            <option value="" disabled selected>Select the SA for this character</option>
+        <div>Critial Level: 
+          <select class="dropdown" id="crit-dropdown-team-7">
+            <option selected="selected" value="15">15</option>
+            <option value="12">12</option>
+            <option value="9">9</option>
+            <option value="6">6</option>
+            <option value="3">3</option>
+            <option value="0">0</option>
           </select>
         </div>
-        <div>Dupe Level:
-          <select class="dupe-dropdown" id="dupe-dropdown-7">
-            <option value="" disabled selected>Select the amount of open paths</option>
-            <option value="d-none">None</option>
-            <option value="d-free">Free</option>
-            <option value="d-1">1</option>
-            <option value="d-2">2</option>
-            <option value="d-3">3</option>
-            <option value="d-rainbow">Rainbow</option>
-          </select>
-        </div>  
+      </div> 
+    </div>
+    <div class="turn-count" id="team-turn-count-div">Turn count:
+      <input id="team-turn-count-input"></input>
+    </div> 
+  </div>
+ 
+  <div>
+      <input type="submit" value="Run Simulation" class="hidden" id="sim-start-button" onclick="runButton(getSimMode().value)">
+  </div>
+  <!-- Instructions -->
+  <div class="instructions-tab hidden" id="instructions-tab">
+    <h2>Instructions</h2>
+    <div class="instructions" id="single-instructions">
+      <h3>Single Character Simulator</h3>
+      <ol>
+        <li>Start by choosing the card you wish to run the simulation on.</li>
+        <ul>
+          <li>Use the auto button to quickly select the current most likely best settings for the character and move to step 5 OR follow the instructions below.</li>
+        </ul>
+        <li>Choose from the common leader skills you want to be applied during the simulation. You can choose to have none or just 1 apply.</li>
+        <li>Choose the Super Attack level for the chosen character.</li>
+        <li>Check the boxes that represent the hidden potential system.
+          <ul>
+            <li>Checking "Rainbow" will override all the other inputs and will be the same as selecting all the individual branches.</li>
+            <li>Checking a branch will assume you want the entirety of the branch, including what would be available without a dupe (the free dupe area).</li>
+          </ul>
+        </li>
+        <li>Enter a number for how many times you want to run the simulator. Choosing a higher number will give a more accurate picture on the average attack of the unit. The single card sim is limited to a maximum of 1000 turns.</li>
+        <li>Once everything is ready, press the run simulation button.</li>
+        <li>When the simulation has finished, the results will be displayed underneath?.</li>
+        <li>.</li>
+      </ol>
+    </div>
+    <div class="instructions" id="team-instructions">
+      <h3>Team Simulator</h3>
+      <ol>
+        <li>Start by choosing the card you wish to run the simulation on.</li>
+        <ul>
+          <li>Use the auto button to quickly select the current most likely best settings for the character and move to step 5 OR follow the instructions below.</li>
+        </ul>
+        <li>Choose from the common leader skills you want to be applied during the simulation. You can choose to have none or just 1 apply.</li>
+        <li>Choose the Super Attack level for the chosen character.</li>
+        <li>Check the boxes that represent the hidden potential system.
+          <ul>
+            <li>Checking "Rainbow" will override all the other inputs and will be the same as selecting all the individual branches.</li>
+            <li>Checking a branch will assume you want the entirety of the branch, including what would be available without a dupe (the free dupe area).</li>
+          </ul>
+        </li>
+        <li>Enter a number for how many times you want to run the simulator. Choosing a higher number will give a more accurate picture on the average attack of the unit. The single card sim is limited to a maximum of 1000 turns.</li>
+        <li>Once everything is ready, press the run simulation button.</li>
+        <li>When the simulation has finished, the results will be displayed underneath?.</li>
+        <li>.</li>
+      </ol>
     </div>
   </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/index.js"></script>
-    <script src="json/card_list.json"></script>
-    <script src="js/cards.js"></script>
-    <script src="js/simulator.js"></script>
+  <script src="src/card_list.json"></script>
+  <script src="src/dupe.json"></script>
+  <script src="js/cards.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="js/index.js"></script>
+  <script src="js/simulator.js"></script>
 </body>
 </html>
