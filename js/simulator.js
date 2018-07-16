@@ -13,11 +13,11 @@ to run the simulator with the desired team and the amount of turns to simulate o
 // Follows the order of operations the game uses
 // Returns an array containing a hash for each attack: key = name, value = damage dealt that attack
 function teamSim(teamArray, turnMax) {
-  turnCount = 0;
-  damageArray = [];
+  let turnCount = 0;
+  let damageArray = [];
   teamLeaderSkills(teamArray);
   while(turnCount < turnMax) {
-    currentRotation = currentRotationGetter(teamArray, turnCount);
+    let currentRotation = currentRotationGetter(teamArray, turnCount);
     // Sims each card individually
     for (let i = 0; i < currentRotation.length; i++) {
       turnStartSkill(currentRotation[i]);
@@ -172,7 +172,27 @@ function afterSASkills(card) {
 
 // TODO
 // Simulates the attack of a single card
-function singleCardSim() {
+function singleCardSim(singleCard, turnMax, leaderSkillsArray) {
+  let turnCount = 0;
+  let damageArray = [];
+  teamLeaderSkills(teamArray);
+  while(turnCount < turnMax) {
+    let currentRotation = currentRotationGetter(teamArray, turnCount);
+    // Sims each card individually
+    for (let i = 0; i < currentRotation.length; i++) {
+      turnStartSkill(currentRotation[i]);
+      linkSkillsActivate(currentRotation[i]);
+      onAttackSkill(currentRotation[i]);
+      onSASkill(currentRotation[i]);
 
+      // TODO: rethink attack functions
+      simTurn(currentRotation[i]);
+
+      afterAttackSkills(currentRotation[i]);
+      afterSASkills(currentRotation[i]);
+    }
+    turnCount++; 
+  }
+  return damageArray;
 }
 
