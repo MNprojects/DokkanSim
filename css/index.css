@@ -1,3 +1,49 @@
 .hidden {
     display: none;
 }
+
+body {
+    background-color: #303030;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+.title {
+    height: 5%;
+    background-color: #31343e;
+}
+
+a {
+    color: white;
+}
+
+a:hover,a:visited,a:active,a:link {
+    color:white;
+}
+
+
+.nav-link {
+    height: 40px;
+    width: 100px;
+    text-align: center
+}
+
+.nav-item > .active {
+    background-color: #303030!important;
+    color: white;
+    border: none;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;  
+    
+}
+
+.nav-link.active.show {
+    color: white;
+    border: none;
+
+}
+
+.nav-tabs {
+    color:white;
+    border-bottom: none;
+}
