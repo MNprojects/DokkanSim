@@ -14,37 +14,345 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid justify-content-center">
+
+        <!-- Title Bar -->
         <div class="row title justify-content-center">
-            <div class="col-xs-12">
+            <div class="col-12">
                 <h2>Dokkan Simulator</h2>
             </div>
-            <div class="col-xs-12">
-                <ul class="nav nav-tabs " id="tab-bar" role="tablist">
-                    <li class="nav-item col-xs-3">
+            <div class="col-12 justify-content-center">
+                <ul class="nav nav-tabs justify-content-center" id="tab-bar" role="tablist">
+                    <li class="nav-item col-4">
                         <a class="nav-link" id="single-tab" data-toggle="tab" href="#single" role="tab" aria-controls="single" aria-selected="false">Single</a>
                     </li>
-                    <li class="nav-item col-xs-3">
+                    <li class="nav-item col-4">
                         <a class="nav-link" id="team-tab" data-toggle="tab" href="#team" role="tab" aria-controls="team" aria-selected="false">Team</a>
                     </li>
                 </ul>
             </div>
         </div>
 
-   
-    <div class="tab-content" id="tab-bar-content">
-        <div class="tab-pane fade show" id="single" role="tabpanel" aria-labelledby="singl-tab">
-            <div class="car">
+        <!-- Simulators -->
+        <div class="row tab-content justify-content-center" id="tab-bar-content">
+
+            <!-- Single -->
+            <div class="tab-pane fade show col-12 justify-content-center row active" id="single" role="tabpanel" aria-labelledby="singl-tab">
+                <div class="pane justify-content-center show-border col-12" id="single-character-pane">
+                    <div class="row">
+                        <div class="col-3 character-icon-div">
+                            <img class="character-icon" src="src/Card_1013210_thumb.png">
+                        </div>
+                        <div class="col-9 character-info">
+                            <div class="character-title">The Prince of all Saiyans</div>
+                            <div class="character-name">Super Saiyan God SS - Vegeta</div>
+                        </div>
+                    </div>
+                    <div class="character-options row">
+                        <h6 class="col-12">Dupe</h6>
+                        <div class="form-check form-check-inline col-2 dupe-checkboxes">
+                            <div class="row">
+                                <input class="form-check-input col-12" type="checkbox" id="single-dupe-free" value="free">
+                                <label class="form-check-label col-12" for="single-dupe-free">Free</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline col-2 dupe-checkboxes">
+                            <div class="row">
+                                <input class="form-check-input col-12" type="checkbox" id="single-dupe-tl" value="tl">
+                                <label class="form-check-label col-12" for="single-dupe-tl">Top Left</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline col-2 dupe-checkboxes">
+                            <div class="row">
+                                <input class="form-check-input col-12" type="checkbox" id="single-dupe-tr" value="tr">
+                                <label class="form-check-label col-12" for="single-dupe-tr">Top Right</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline col-2 dupe-checkboxes">
+                            <div class="row">
+                                <input class="form-check-input col-12" type="checkbox" id="single-dupe-bl" value="bl">
+                                <label class="form-check-label col-12" for="single-dupe-bl">Bottom Left</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline col-2 dupe-checkboxes">
+                            <div class="row">
+                                <input class="form-check-input col-12" type="checkbox" id="single-dupe-br" value="br">
+                                <label class="form-check-label col-12" for="single-dupe-br">Bottom Right</label>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline col-2 dupe-checkboxes">
+                            <div class="row">
+                                <input class="form-check-input col-12" type="checkbox" id="single-dupe-rainbow" value="rainbow">
+                                <label class="form-check-label col-12" for="single-dupe-rainbow">Rainbow</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="character-options row">
+                        <h6 class="col-12">Active Links</h6>
+                        <div class="col-12">
+                            <div class="form-check form-check-inline links-checkboxes">
+                                <div class="row">
+                                    <input class="form-check-input col-12" type="checkbox" id="single-links-1" value="">
+                                    <label class="form-check-label col-12" for="single-links-1">Godly Power - 15% ATK</label>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline links-checkboxes">
+                                <div class="row">
+                                    <input class="form-check-input col-12" type="checkbox" id="single-links-2" value="">
+                                    <label class="form-check-label col-12" for="single-links-2">Super Saiyan - 10% ATK</label>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline links-checkboxes">
+                                <div class="row">
+                                    <input class="form-check-input col-12" type="checkbox" id="single-links-3" value="">
+                                    <label class="form-check-label col-12" for="single-links-3">Experienced Fighters - 10% ATK</label>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline links-checkboxes">
+                                <div class="row">
+                                    <input class="form-check-input col-12" type="checkbox" id="single-links-4" value="">
+                                    <label class="form-check-label col-12" for="single-links-4">Prepared for Battle - 2 Ki</label>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline links-checkboxes">
+                                <div class="row">
+                                    <input class="form-check-input col-12" type="checkbox" id="single-links-5" value="">
+                                    <label class="form-check-label col-12" for="single-links-5">Shocking Speed - 2 Ki</label>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline links-checkboxes">
+                                <div class="row">
+                                    <input class="form-check-input col-12" type="checkbox" id="single-links-6" value="">
+                                    <label class="form-check-label col-12" for="single-links-6">First Awakened - 10% ATK</label>
+                                </div>
+                            </div>
+                            <div class="form-check form-check-inline links-checkboxes">
+                                <div class="row">
+                                    <input class="form-check-input col-12" type="checkbox" id="single-links-7" value="">
+                                    <label class="form-check-label col-12" for="single-links-7">Fierce Battle - 15% ATK</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h6 class="col-12">Crit</h6>
+                        <div class="col-12">
+                            <input type="range" value="0" min="0" max="15" step="3" name="single-crit-slider" list="single-tickmarks-crit" class="col-10 skills-slider align-self-center"
+                                id="myRange">
+                            <output class="col-1 skills-output"></output>
+                            <datalist id="single-tickmarks-crit">
+                                <option value="0" />
+                                <option value="3" />
+                                <option value="6" />
+                                <option value="9" />
+                                <option value="12" />
+                                <option value="15" />
+                            </datalist>
+                        </div>
+                        <h6 class="col-12">Additional Attack</h6>
+                        <div class="col-12">
+                            <input type="range" value="0" min="0" max="15" step="3" name="single-crit-slider" list="single-tickmarks-aa" class="col-10 skills-slider"
+                                id="myRange">
+                            <output class="col-1 skills-output">0</output>
+                            <datalist id="single-tickmarks-aa">
+                                <option value="0.0" />
+                                <option value="3.0" />
+                                <option value="6.0" />
+                                <option value="9.0" />
+                                <option value="12.0" />
+                                <option value="15.0" />
+                            </datalist>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="pane even show-border col-12" id="single-settings-pane">
+                    <div class="row justify-content-center">
+                        <h4>Simulator Settings</h4>
+                        <div class="col-12 single-leader-skills">
+                            <div class="col-12">Frist leader:
+                                <select class="leader-dropdown" id="single-leader-1" list="sample-leader-skills">
+                                    <datalist id="sample-leader-skills">
+                                        <option value="" disabled selected>Choose a leader skill</option>
+                                        <option value="170">3 Ki, 170% Attack</option>
+                                        <option value="150">3 Ki, 150% Attack</option>
+                                        <option value="130">3 Ki, 130% Attack</option>
+                                        <option value="120">3 Ki, 120% Attack</option>
+                                        <option value="100">3 Ki, 100% Attack</option>
+                                        <option value="70">3 Ki, 70% Attack</option>
+                                        <option value="4">4 Ki, 100% Attack</option>
+                                        <option value="0">None</option>
+                                    </datalist>
+                                </select>
+                            </div>
+                            <div class="col-12">Second leader:
+                                <select class="dropdown" id="single-leader-2" list="sample-leader-skills"></select>
+                            </div>
+                            <div class="col-12">Turn count:
+                                <input type="number" value="100">
+                            </div>
+                            <div class="col-12">Skip turns:
+                                <input type="number" placeholder="0">
+                            </div>
+                            <div class="col-12">Run times:
+                                <input type="number" placeholder="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="pane show-border col-12" id="single-results-pane">
+                    <div class="row justify-content-center">
+                        <h4>Results</h4>
+                        <div class="col-12 single-leader-skills">
+                            <div class="col-12">Average ApT:
+                                <span id="single-results-apt"> </span>
+
+                            </div>
+                            <div class="col-12">Total Attack:
+                                <span id="single-results-total"></span>
+
+                            </div>
+                            <div class="col-12">Turn Count:
+                                <span id="single-results-"></span>
+
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-3">Turns:
+                                    <span id="single-results-turns"></span>
+                                </div>
+                                <div class="col-3">Skipped Turns:
+                                    <span id="single-results-skipped"></span>
+                                </div>
+                                <div class="col-3">Run times:
+                                    <span id="single-results-run"></span>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-8">Full results:
+                                    Turn 1: normal 100,000, Turn 2: Super 1,000,000 AA Super 1,000,000
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
-        </div>
-        <div class="tab-pane fade" id="team" role="tabpanel" aria-labelledby="team-tab">
-            Team content.
-            <div class="carousel">
-                
+
+
+
+
+            <!-- Team -->
+            <div class="tab-pane fade" id="team" role="tabpanel" aria-labelledby="team-tab">
+                Team content.
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="character-pane justify-content-center show-border col-12">
+                                    <div class="row">
+                                        <div class="col-3 character-icon-div">
+                                            <img class="character-icon" src="src/Card_1013210_thumb.png">
+                                        </div>
+                                        <div class="col-9 character-info">
+                                            <div class="character-title">The Prince of all Saiyans</div>
+                                            <div class="character-name">Super Saiyan God SS - Vegeta</div>
+                                        </div>
+                                    </div>
+                                    <div class="character-options row">
+                                        <div class="dupe-div">
+                                            <div class="form-check form-check-inline col-2">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1"> Free</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                <label class="form-check-label" for="inlineCheckbox2">Top Left</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                <label class="form-check-label" for="inlineCheckbox2">Top Right</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                <label class="form-check-label" for="inlineCheckbox2">Bottom Left</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                <label class="form-check-label" for="inlineCheckbox2">Bottom Right</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                                <label class="form-check-label" for="inlineCheckbox2">Rainbow</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="character-pane justify-content-center show-border col-12">
+                                <div class="row">
+                                    <div class="col-3 character-icon-div">
+                                        <img class="character-icon" src="src/Card_1013210_thumb.png">
+                                    </div>
+                                    <div class="col-9 character-info">
+                                        <div class="character-title">The Prince of all Saiyans</div>
+                                        <div class="character-name">Super Saiyan God SS - Vegeta</div>
+                                    </div>
+                                </div>
+                                <div class="character-options row">
+                                    <div class="dupe-div">
+                                        <div class="form-check form-check-inline col-2">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                            <label class="form-check-label" for="inlineCheckbox1"> Free</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            <label class="form-check-label" for="inlineCheckbox2">Top Left</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            <label class="form-check-label" for="inlineCheckbox2">Top Right</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            <label class="form-check-label" for="inlineCheckbox2">Bottom Left</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            <label class="form-check-label" for="inlineCheckbox2">Bottom Right</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            <label class="form-check-label" for="inlineCheckbox2">Rainbow</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 
     <!-- Optional JavaScript -->
@@ -56,6 +364,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/team_validations.js"></script>
+    <script src="js/simulator.js"></script>
+    <script src=""></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>

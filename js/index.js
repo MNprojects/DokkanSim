@@ -1,8 +1,23 @@
+
+
+let slider = document.getElementsByClassName("skills-slider");
+let output = document.getElementsByClassName("skills-output");
+
+for (let i = 0; i < slider.length; i++) {
+  output[i].innerHTML = slider[i].value;
+  slider[i].oninput = function () {
+    output[i].innerHTML = this.value;
+  }
+}
+
+// Update the current slider value (each time you drag the slider handle)
+
+
 // All DOM interactions happen in this file
 
 // Self invoking to run when document has loaded. 
 // Adds an option to all of the card dropdowns for each object contained in card_list.json
-(function populateCardDropdowns(){
+(function populateCardDropdowns() {
   let singleDropdown = document.getElementById('card-dropdown-single');
   let teamDropdown = document.getElementsByClassName('team-card-dropdown');
 
@@ -16,29 +31,35 @@
     singleDropdown.appendChild(clone);
     for (let j = 0; j < teamDropdown.length; j++) {
       let clone1 = clone.cloneNode(true);
-      teamDropdown[j].appendChild(clone1); 
+      teamDropdown[j].appendChild(clone1);
     }
   }
 })();
 
 // Triggered by the user clicking the Run button. 
-// Starts the simulation
-function runButton(simMode){
-  if(simMode === 'single') {
-    validateSingleChoices(getSingleCard(),getSingleSALevel(),getSingleDupeStatus(),getSingleDupeSkills());
-    let singleCard = prepCard(getSingleCard(),getSingleSALevel(),getSingleDupeStatus(),getSingleDupeSkills());
-    singleCardSim(singleCard);
-  } else if (simMode === 'team') {
-    teamDivsArray = getChosenCards();
-    validateTeamChoices(teamDivsArray);
-    
-    teamArray = setTeam(teamDivsArray);
-    for (let i = 0; i < teamArray.length; i++) {
-      prepCard(teamArray[i]);
-    }
-    runTeamValidations(teamArray);
-    teamSim(teamArray, getTurnInput);
+// Validates the inputs then starts the simulation
+function runSingleSim() {
+  let singleCharacter = [getSingleCharacter(), getSingleSALevel(), getSingleDupeStatus(), getSingleDupeSkills()]
+  validatecharacterChoices(singleCard);
+  singleCharacter = prepCard(singleCard);
+  singleCharacterSim(singleCharacter);
+}
+
+function runTeamSim() {
+  teamDivsArray = getChosenCards();
+  for (let i = 0; i < teamDivsArray.length; i++) {
+    validateCharacterChoices(teamDivsArray[i]);
+    teamArray[i] = prepCard(teamArray[i]);
   }
+
+
+  teamArray = setTeam(teamDivsArray);
+  for (let i = 0; i < teamArray.length; i++) {
+
+  }
+  runTeamValidations(teamArray);
+  teamSim(teamArray, getTurnInput);
+
 }
 
 // TODO: fill in all the values
@@ -59,13 +80,13 @@ function prepCard(singleCard, SAlvlInt, dupeLevelArray, dupeSkillsArray) {
 }
 
 // TODO change SA dropdown to include/remove higher levels if needed; complete method
-function checkSALevel(selectElement) {
-  if (cardSA > optionSA) {
-    for(i=cardSA; i < optionSA; i++){
+function checkSALevel(lastOptionSA, cardSA) {
+  if (cardSA > lastOptionSA) {
+    for (let i = lastOptionSA; i < cardSA; i++) {
       addSALevelOption(i);
     }
-  } else if (cardSA < optionSA) {
-    for(j=cardSA; j < optionSA; j++){
+  } else if (cardSA < lastOptionSA) {
+    for (let j = cardSA; j < lastOptionSA; j++) {
       removeSALevelOption(j);
     }
   }
@@ -79,19 +100,10 @@ function removeSALevelOption(level) {
 
 }
 
-// Changes the display depending upon the sim-mode chosen
-function simDisplay() {
-  let simMode = getSimMode().value;
-  if(simMode === 'single'){
-    singleSimDisplay();
-  } else if(simMode === 'team'){
-    teamSimDisplay();
-  }
-}
 
 
 // Adds the attack bonus from the dupe system. 
-  // Must be validated against SA if BR is included, not defensive here
+// Must be validated against SA if BR is included, not defensive here
 function calcDupeAttackBoost(dupeLevelArray) {
   let attackBoost = 0;
   let dupeStats = dupeAttackBoosts[0][singleCard['type']][singleCard['dupeRanking']]
@@ -111,7 +123,7 @@ function calcDupeAttackBoost(dupeLevelArray) {
         attackBoost += dupeStats[dupeLevelArray[i]][0]
       } else {
         attackBoost += dupeStats[dupeLevelArray[i]][0]
-      } 
+      }
     }
     else if (dupeLevelArray.includes('dupe-free')) {
       attackBoost += dupeStats[dupeLevelArray[i]][1]
@@ -163,14 +175,14 @@ function setTeamAutoBest() {
   let teamDisplayArray = getChosenCards();
   let dupeArray = ['dupe-free-', 'dupe-tl-', 'dupe-tr-', 'dupe-bl-', 'dupe-br-', 'dupe-rainbow-']
   let saString = 'sa-dropdown-';
-  for(i = 1; i < teamDisplayArray.length; i++) {
-    document.getElementById(saString+i).selectedIndex = 0;
-    document.getElementById(dupeArray[0]+i).checked = false;
-    document.getElementById(dupeArray[1]+i).checked = false;
-    document.getElementById(dupeArray[2]+i).checked = false;
-    document.getElementById(dupeArray[3]+i).checked = false;
-    document.getElementById(dupeArray[4]+i).checked = false;
-    document.getElementById(dupeArray[5]+i).checked = true;
+  for (let i = 1; i < teamDisplayArray.length; i++) {
+    document.getElementById(saString + i).selectedIndex = 0;
+    document.getElementById(dupeArray[0] + i).checked = false;
+    document.getElementById(dupeArray[1] + i).checked = false;
+    document.getElementById(dupeArray[2] + i).checked = false;
+    document.getElementById(dupeArray[3] + i).checked = false;
+    document.getElementById(dupeArray[4] + i).checked = false;
+    document.getElementById(dupeArray[5] + i).checked = true;
   }
 }
 
@@ -194,7 +206,7 @@ function getSingleTurnInput() {
 }
 
 // Returns the element for the team turn count field
-function getTeamTurnInput() { 
+function getTeamTurnInput() {
   return document.getElementById('team-turn-count-input');
 }
 
@@ -203,10 +215,10 @@ function getSingleCard() {
   id = parseInt(document.getElementById('card-dropdown-single').value)
   let singleCard;
   for (let i = 0; i < data.length; i++) {
-    if(data[i].id === id) {
+    if (data[i].id === id) {
       singleCard = data[i];
       break;
-    } 
+    }
   }
   return singleCard;
 }
@@ -215,11 +227,11 @@ function getSingleCard() {
 function getSingleDupeStatus() {
   let dupeArray = [];
   let checkboxes = document.getElementsByClassName('single-dupe-checkbox');
-  if(checkboxes[5].checked === true) {
+  if (checkboxes[5].checked === true) {
     dupeArray.push(checkboxes[5].id);
   } else {
     for (let i = 0; i < checkboxes.length; i++) {
-      if(checkboxes[i].checked === true) {
+      if (checkboxes[i].checked === true) {
         dupeArray.push(checkboxes[i].id);
       }
     }
@@ -242,11 +254,11 @@ function getTeamSALevel(idInt) {
 // Returns an array of the selected dupe level for the given character slot
 function getTeamDupeLevel(idInt) {
   let dupeArray = [];
-  let choicesArray = ['dupe-free','dupe-tl','dupe-tr','dupe-bl','dupe-br','dupe-rainbow'];
+  let choicesArray = ['dupe-free', 'dupe-tl', 'dupe-tr', 'dupe-bl', 'dupe-br', 'dupe-rainbow'];
   for (let i = 0; i < choicesArray.length; i++) {
     let choice = choicesArray[i] + '-' + idInt;
     let choiceBool = document.getElementById(choice).checked;
-    if(choiceBool === true){
+    if (choiceBool === true) {
       dupeArray.push(choicesArray[i]);
     }
   }
@@ -274,9 +286,9 @@ function getTeamDupeSkils(idInt) {
 
 // Checks if the given array contains all of the possible trees and replaces the array with just rainbow if so
 function dupeRainbowCheck(dupeArray) {
-  if(dupeArray.includes('dupe-rainbow')){
-    dupeArray = ['dupe-tl','dupe-bl','dupe-tr','dupe-br']
+  if (dupeArray.includes('dupe-rainbow')) {
+    dupeArray = ['dupe-tl', 'dupe-bl', 'dupe-tr', 'dupe-br']
   }
   return dupeArray;
 }
- 
+

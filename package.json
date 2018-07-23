@@ -1,0 +1,30 @@
+{
+  "name": "DokkanSim",
+  "version": "1.0.0",
+  "description": "A simulator built in JS for DBZ Dokkan Battle mobile game",
+  "main": "index.js",
+  "directories": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0",
+    "chai": "^4.1.2"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MNprojects/DokkanSim.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MNprojects/DokkanSim/issues"
+  },
+  "homepage": "https://github.com/MNprojects/DokkanSim#readme"
+}
